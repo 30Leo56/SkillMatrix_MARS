@@ -72,12 +72,14 @@ export default function SkillMatrixSetup() {
           className="w-full p-4 border border-gray-300 rounded text-sm"
           placeholder="Hier Projektbeschreibung eingeben..."
         />
-        <button
-          onClick={autoGenerateFromText}
-          className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
-        >
-          Projektstruktur mit KI erzeugen
-        </button>
+        <div className="mt-4">
+          <button
+            onClick={autoGenerateFromText}
+            className="px-4 py-2 bg-green-600 text-white rounded"
+          >
+            Projektstruktur mit KI erzeugen
+          </button>
+        </div>
       </div>
 
       {rows.length > 0 && (
