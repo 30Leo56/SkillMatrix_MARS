@@ -1,51 +1,13 @@
 import { useState } from "react";
 import * as XLSX from "xlsx";
 
-const initialRows = [
-  {
-    aufgabe: "Insektenhotels konstruieren und aufstellen",
-    rolle: "Bauleitung",
-    kategorie: "Handwerk",
-    skill: "Holzbearbeitung",
-    soll: 3
-  },
-  {
-    aufgabe: "Finanzierung und Fördermittel organisieren",
-    rolle: "Fördermittelmanagement",
-    kategorie: "Finanzen",
-    skill: "Fördermittel beantragen",
-    soll: 2
-  },
-  {
-    aufgabe: "Schülerbetreuung und Zusammenarbeit koordinieren",
-    rolle: "Pädagogische Begleitung",
-    kategorie: "Soziales",
-    skill: "Anleitung Jugendlicher",
-    soll: 2
-  },
-  {
-    aufgabe: "Projekt dokumentieren",
-    rolle: "Dokumentation",
-    kategorie: "Kommunikation",
-    skill: "Fotografie",
-    soll: 2
-  },
-  {
-    aufgabe: "Öffentlichkeitsarbeit gestalten",
-    rolle: "PR",
-    kategorie: "Marketing",
-    skill: "Social Media",
-    soll: 3
-  }
-];
-
 const initialTeamMembers = [
   "Name 1", "Name 2", "Name 3", "Name 4",
   "Name 5", "Name 6", "Name 7", "Name 8"
 ];
 
 export default function SkillMatrixSetup() {
-  const [rows, setRows] = useState(initialRows);
+  const [rows, setRows] = useState([]);
   const [projectText, setProjectText] = useState("");
   const [skills, setSkills] = useState({});
   const [teamMembers, setTeamMembers] = useState(initialTeamMembers);
@@ -66,6 +28,12 @@ export default function SkillMatrixSetup() {
     });
   };
 
+  const handleNameChange = (index, value) => {
+    const updated = [...teamMembers];
+    updated[index] = value;
+    setTeamMembers(updated);
+  };
+
   const autoGenerateFromText = async () => {
     const response = await fetch("/skills.xlsx");
     const data = await response.arrayBuffer();
@@ -77,35 +45,43 @@ export default function SkillMatrixSetup() {
       skillsByCategory[sheetName] = rows.map((r) => r.Skill);
     });
 
-    const lowerText = projectText.toLowerCase();
-    const generated = [];
+    const apiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}
+`
+      },
+      body: JSON.stringify({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "Analysiere den Projekttext und gib Aufgaben mit zugehöriger Rolle, Kategorie und passenden Skills zurück. Die Skills dürfen nur aus den bereitgestellten Listen verwendet werden."
+          },
+          {
+            role: "user",
+            content: projectText
+          }
+        ]
+      })
+    });
 
-    for (const [kategorie, skills] of Object.entries(skillsByCategory)) {
-      for (const skill of skills) {
-        if (lowerText.includes(skill.toLowerCase())) {
-          generated.push({
-            aufgabe: `Arbeit an: ${skill}`,
-            rolle: "",
-            kategorie,
-            skill,
-            soll: 3
-          });
-        }
-      }
-    }
+    const apiData = await apiResponse.json();
+    const parsedText = apiData.choices?.[0]?.message?.content || "";
+    const lines = parsedText.split("\n").filter((line) => line.includes(";") && line.split(";").length >= 4);
+
+    const generated = lines.map((line) => {
+      const [aufgabe, rolle, kategorie, skill] = line.split(";").map((s) => s.trim());
+      return { aufgabe, rolle, kategorie, skill, soll: 3 };
+    });
 
     setRows(generated);
   };
 
-  const handleNameChange = (index, value) => {
-    const updated = [...teamMembers];
-    updated[index] = value;
-    setTeamMembers(updated);
-  };
-
   return (
     <div className="p-4 space-y-10">
-      <h1 className="text-xl font-bold">SkillMatrix NG - FINALTEST</h1>
+      <h1 className="text-xl font-bold">SkillMatrix NG - GPT API</h1>
 
       <section className="w-full px-4 mb-16">
         <label htmlFor="projektbeschreibung" className="block text-sm font-semibold mb-2">
