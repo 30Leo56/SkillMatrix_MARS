@@ -112,6 +112,7 @@ export default function SkillMatrixSetup() {
               {teamMembers.map(name => (
                 <th key={name} className="border px-2 py-1">{name}</th>
               ))}
+              <th className="border px-2 py-1">Lücke</th>
             </tr>
           </thead>
           <tbody>
@@ -119,6 +120,7 @@ export default function SkillMatrixSetup() {
               const skillName = row.skill;
               const soll = row.soll;
               const skillLevels = skills[skillName] || {};
+              const allZeros = teamMembers.every(member => (skillLevels[member] || 0) === 0);
 
               return (
                 <tr key={i}>
@@ -135,11 +137,11 @@ export default function SkillMatrixSetup() {
                         style={{
                           backgroundColor:
                             ist === soll
-                              ? "#BBF7D0" // grün
+                              ? "#BBF7D0"
                               : soll - ist === 1
-                              ? "#FEF08A" // gelb
+                              ? "#FEF08A"
                               : soll - ist >= 2
-                              ? "#FECACA" // rot
+                              ? "#FECACA"
                               : "transparent"
                         }}
                       >
@@ -159,6 +161,9 @@ export default function SkillMatrixSetup() {
                       </td>
                     );
                   })}
+                  <td className="border px-2 py-1 text-center font-bold text-red-600">
+                    {allZeros ? "!!!" : ""}
+                  </td>
                 </tr>
               );
             })}
