@@ -83,8 +83,8 @@ export default function SkillMatrixSetup() {
         </button>
       </div>
 
-      <div className="space-y-2">
-        <div className="grid grid-cols-5 gap-2 font-semibold">
+      <div className="pt-4">
+        <div className="grid grid-cols-5 gap-2 font-bold border-b pb-1 mb-2">
           <div>Aufgabe</div>
           <div>Rolle</div>
           <div>Kategorie</div>
@@ -92,7 +92,7 @@ export default function SkillMatrixSetup() {
           <div>Soll</div>
         </div>
         {rows.map((row, index) => (
-          <div key={index} className="grid grid-cols-5 gap-2 items-center">
+          <div key={index} className="grid grid-cols-5 gap-2 items-center mb-1">
             <input type="text" placeholder="Aufgabe" value={row.aufgabe} onChange={(e) => handleChange(index, "aufgabe", e.target.value)} className="p-2 border rounded" />
             <input type="text" placeholder="Rolle" value={row.rolle} onChange={(e) => handleChange(index, "rolle", e.target.value)} className="p-2 border rounded" />
             <input type="text" placeholder="Kategorie" value={row.kategorie} onChange={(e) => handleChange(index, "kategorie", e.target.value)} className="p-2 border rounded" />
@@ -119,7 +119,6 @@ export default function SkillMatrixSetup() {
               const skillName = row.skill;
               const soll = row.soll;
               const skillLevels = skills[skillName] || {};
-              const hasGap = teamMembers.every(member => (skillLevels[member] || 0) === 0);
 
               return (
                 <tr key={i}>
