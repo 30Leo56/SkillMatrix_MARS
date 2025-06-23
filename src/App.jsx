@@ -61,7 +61,7 @@ export default function SkillMatrixSetup() {
       <h1 className="text-xl font-bold">SkillMatrix NG</h1>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium">Projektbeschreibung eingeben:</label>
+        <label className="block text-sm font-medium mb-2">Projektbeschreibung eingeben:</label>
         <textarea
           rows={8}
           value={projectText}
@@ -79,10 +79,10 @@ export default function SkillMatrixSetup() {
         </div>
       </div>
 
-      <hr className="my-6 border-gray-300" />
+      <hr className="my-10 border-gray-300" />
 
       {rows.length > 0 && (
-        <div className="pt-16">
+        <div className="pt-4">
           <table className="min-w-full border text-sm mb-4">
             <thead>
               <tr className="bg-gray-100">
