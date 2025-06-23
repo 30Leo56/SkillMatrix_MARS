@@ -129,7 +129,7 @@ export default function SkillMatrixSetup() {
                   <td className="border px-2 py-1 text-center font-bold text-red-600">{allZeros ? "!!!" : ""}</td>
                   {teamMembers.map(member => {
                     const ist = skillLevels[member] || 0;
-                    const defizit = ist < soll && !allZeros ? (soll - ist >= 2 ? "!!!" : "!") : "";
+                    const defizit = ist < soll ? (soll - ist >= 2 ? "!!!" : "!") : "";
 
                     return (
                       <td
@@ -139,9 +139,9 @@ export default function SkillMatrixSetup() {
                           backgroundColor:
                             ist === soll
                               ? "#BBF7D0"
-                              : soll - ist === 1 && !allZeros
+                              : soll - ist === 1
                               ? "#FEF08A"
-                              : soll - ist >= 2 && !allZeros
+                              : soll - ist >= 2
                               ? "#FECACA"
                               : "transparent"
                         }}
