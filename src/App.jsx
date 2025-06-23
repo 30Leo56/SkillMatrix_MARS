@@ -128,48 +128,14 @@ export default function SkillMatrixSetup() {
         </div>
       </section>
 
-      {rows.length > 0 && (
-        <div className="pt-10">
-          <table className="min-w-full border text-sm mb-4">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border px-2 py-1">Aufgabe</th>
-                <th className="border px-2 py-1">Rolle</th>
-                <th className="border px-2 py-1">Kategorie</th>
-                <th className="border px-2 py-1">Skill</th>
-                <th className="border px-2 py-1">Soll</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, index) => (
-                <tr key={index}>
-                  <td className="border px-2 py-1">
-                    <input type="text" placeholder="Aufgabe" value={row.aufgabe} onChange={(e) => handleChange(index, "aufgabe", e.target.value)} className="w-full p-1" />
-                  </td>
-                  <td className="border px-2 py-1">
-                    <input type="text" placeholder="Rolle" value={row.rolle} onChange={(e) => handleChange(index, "rolle", e.target.value)} className="w-full p-1" />
-                  </td>
-                  <td className="border px-2 py-1">
-                    <input type="text" placeholder="Kategorie" value={row.kategorie} onChange={(e) => handleChange(index, "kategorie", e.target.value)} className="w-full p-1" />
-                  </td>
-                  <td className="border px-2 py-1">
-                    <input type="text" placeholder="Skill" value={row.skill} onChange={(e) => handleChange(index, "skill", e.target.value)} className="w-full p-1" />
-                  </td>
-                  <td className="border px-2 py-1 text-center">
-                    <input type="number" min={1} max={4} value={row.soll} onChange={(e) => handleChange(index, "soll", e.target.value)} className="w-16 text-center" />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
       <h2 className="text-lg font-semibold pt-6">Team-Profile & Skill-Levels</h2>
       <div className="overflow-auto">
         <table className="min-w-full border text-sm mb-2">
           <thead>
             <tr>
+              <th className="border px-2 py-1">Aufgabe</th>
+              <th className="border px-2 py-1">Rolle</th>
+              <th className="border px-2 py-1">Kategorie</th>
               <th className="border px-2 py-1">Skill</th>
               <th className="border px-2 py-1">Soll</th>
               <th className="border px-2 py-1">Lücke</th>
@@ -197,6 +163,9 @@ export default function SkillMatrixSetup() {
 
               return (
                 <tr key={i}>
+                  <td className="border px-2 py-1">{row.aufgabe}</td>
+                  <td className="border px-2 py-1">{row.rolle}</td>
+                  <td className="border px-2 py-1">{row.kategorie}</td>
                   <td className="border px-2 py-1">{skillName}</td>
                   <td className="border px-2 py-1 text-center">{soll}</td>
                   <td className="border px-2 py-1 text-center font-bold text-red-600">{allZeros ? "!!!" : ""}</td>
