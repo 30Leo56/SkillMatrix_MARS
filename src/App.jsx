@@ -1,4 +1,4 @@
-import { useState } from "react";
+""import { useState } from "react";
 
 const initialRows = [
   { aufgabe: "", rolle: "", kategorie: "", skill: "", soll: 1 }
@@ -60,7 +60,7 @@ export default function SkillMatrixSetup() {
     <div className="p-4 space-y-10">
       <h1 className="text-xl font-bold">SkillMatrix NG</h1>
 
-      <div className="mb-20 w-full">
+      <div className="mb-10 w-full">
         <label htmlFor="projektbeschreibung" className="block text-sm font-medium mb-2">
           Projektbeschreibung eingeben:
         </label>
@@ -83,7 +83,7 @@ export default function SkillMatrixSetup() {
       </div>
 
       {rows.length > 0 && (
-        <div className="pt-4">
+        <div className="pt-10">
           <table className="min-w-full border text-sm mb-4">
             <thead>
               <tr className="bg-gray-100">
