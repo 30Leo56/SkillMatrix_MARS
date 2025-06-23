@@ -60,7 +60,7 @@ export default function SkillMatrixSetup() {
     <div className="p-4 space-y-10">
       <h1 className="text-xl font-bold">SkillMatrix NG</h1>
 
-      <div className="mb-16 w-full">
+      <div className="mb-20 w-full">
         <label htmlFor="projektbeschreibung" className="block text-sm font-medium mb-2">
           Projektbeschreibung eingeben:
         </label>
