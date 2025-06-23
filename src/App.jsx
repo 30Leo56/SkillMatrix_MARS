@@ -112,6 +112,7 @@ export default function SkillMatrixSetup() {
               <th className="border px-2 py-1">Skill</th>
               <th className="border px-2 py-1">Soll</th>
               <th className="border px-2 py-1">Lücke</th>
+              <th className="border px-2 py-1">Defizit</th>
               {teamMembers.map(name => (
                 <th key={name} className="border px-2 py-1">{name}</th>
               ))}
@@ -123,12 +124,16 @@ export default function SkillMatrixSetup() {
               const soll = row.soll;
               const skillLevels = skills[skillName] || {};
               const allZeros = teamMembers.every(member => (skillLevels[member] || 0) === 0);
+              const anyMeetsSoll = teamMembers.some(member => (skillLevels[member] || 0) >= soll);
+              const allDeficit = teamMembers.every(member => (skillLevels[member] || 0) < soll);
+              const zeilenDefizit = !allZeros && allDeficit ? "!" : "";
 
               return (
                 <tr key={i}>
                   <td className="border px-2 py-1">{skillName}</td>
                   <td className="border px-2 py-1 text-center">{soll}</td>
                   <td className="border px-2 py-1 text-center font-bold text-red-600">{allZeros ? "!!!" : ""}</td>
+                  <td className="border px-2 py-1 text-center font-bold text-yellow-600">{zeilenDefizit}</td>
                   {teamMembers.map(member => {
                     const ist = skillLevels[member] || 0;
                     const defizit = soll - ist >= 2 ? "!" : "";
