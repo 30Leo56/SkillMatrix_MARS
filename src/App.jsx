@@ -55,25 +55,27 @@ export default function SkillMatrixSetup() {
     ];
     setRows(aiRows);
   };
+
   return (
     <div className="p-4 space-y-10">
       <h1 className="text-xl font-bold">SkillMatrix NG - TEST</h1>
-      <div className="w-full mb-12">
-        <label htmlFor="projektbeschreibung" className="block text-sm font-medium mb-2">
+
+      <div className="w-full px-2 py-4 bg-gray-50 rounded-lg shadow mb-12">
+        <label htmlFor="projektbeschreibung" className="block text-sm font-semibold mb-2">
           Projektbeschreibung eingeben:
         </label>
         <textarea
           id="projektbeschreibung"
-          rows={8}
+          rows={6}
           value={projectText}
           onChange={(e) => setProjectText(e.target.value)}
-          className="w-full p-4 border border-gray-300 rounded text-sm"
+          className="w-full p-3 border border-gray-300 rounded text-sm"
           placeholder="Hier Projektbeschreibung eingeben..."
         />
-        <div className="mt-4">
+        <div className="mt-3">
           <button
             onClick={autoGenerateFromText}
-            className="px-4 py-2 bg-green-600 text-white rounded"
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
           >
             Projektstruktur mit KI erzeugen
           </button>
