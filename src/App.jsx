@@ -35,41 +35,16 @@ export default function SkillMatrixSetup() {
   };
 
   const autoGenerateFromText = async () => {
-    const response = await fetch("/skills.xlsx");
-    const data = await response.arrayBuffer();
-    const workbook = XLSX.read(data, { type: "array" });
-
-    const skillsByCategory = {};
-    workbook.SheetNames.forEach((sheetName) => {
-      const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-      skillsByCategory[sheetName] = rows.map((r) => r.Skill);
-    });
-
-    const apiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("/api/generateTasks", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}
-`
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        model: "gpt-4",
-        messages: [
-          {
-            role: "system",
-            content: "Analysiere den Projekttext und gib Aufgaben mit zugehöriger Rolle, Kategorie und passenden Skills zurück. Die Skills dürfen nur aus den bereitgestellten Listen verwendet werden."
-          },
-          {
-            role: "user",
-            content: projectText
-          }
-        ]
-      })
+      body: JSON.stringify({ projectText })
     });
 
-    const apiData = await apiResponse.json();
-    const parsedText = apiData.choices?.[0]?.message?.content || "";
-    const lines = parsedText.split("\n").filter((line) => line.includes(";") && line.split(";").length >= 4);
+    const result = await response.json();
+    const lines = result.tasks || [];
 
     const generated = lines.map((line) => {
       const [aufgabe, rolle, kategorie, skill] = line.split(";").map((s) => s.trim());
