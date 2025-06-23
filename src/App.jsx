@@ -1,4 +1,4 @@
-""import { useState } from "react";
+import { useState } from "react";
 
 const initialRows = [
   { aufgabe: "", rolle: "", kategorie: "", skill: "", soll: 1 }
@@ -60,7 +60,7 @@ export default function SkillMatrixSetup() {
     <div className="p-4 space-y-10">
       <h1 className="text-xl font-bold">SkillMatrix NG</h1>
 
-      <div className="mb-10 w-full">
+      <div className="w-full mb-12">
         <label htmlFor="projektbeschreibung" className="block text-sm font-medium mb-2">
           Projektbeschreibung eingeben:
         </label>
@@ -72,14 +72,12 @@ export default function SkillMatrixSetup() {
           className="w-full p-4 border border-gray-300 rounded text-sm"
           placeholder="Hier Projektbeschreibung eingeben..."
         />
-        <div className="mt-4">
-          <button
-            onClick={autoGenerateFromText}
-            className="px-4 py-2 bg-green-600 text-white rounded"
-          >
-            Projektstruktur mit KI erzeugen
-          </button>
-        </div>
+        <button
+          onClick={autoGenerateFromText}
+          className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
+        >
+          Projektstruktur mit KI erzeugen
+        </button>
       </div>
 
       {rows.length > 0 && (
