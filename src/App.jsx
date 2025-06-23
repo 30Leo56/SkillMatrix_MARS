@@ -36,31 +36,25 @@ export default function SkillMatrixSetup() {
       skillsByCategory[sheetName] = rows.map((r) => r.Skill);
     });
 
-    const tasks = [
-      {
-        aufgabe: "Insektenhotels konstruieren",
-        rolle: "Bauleitung",
-        kategorie: "Handwerk",
-        skill: "Holzbearbeitung",
-        soll: 3
-      },
-      {
-        aufgabe: "Projekt dokumentieren",
-        rolle: "Dokumentation",
-        kategorie: "Kommunikation",
-        skill: "Fotografie",
-        soll: 2
-      },
-      {
-        aufgabe: "Öffentlichkeitsarbeit planen",
-        rolle: "PR",
-        kategorie: "Marketing",
-        skill: "Social Media",
-        soll: 4
-      }
-    ];
+    // Einfache Logik: Zuordnung einiger generischer Aufgaben basierend auf Stichworten
+    const lowerText = projectText.toLowerCase();
+    const generated = [];
 
-    setRows(tasks);
+    for (const [kategorie, skills] of Object.entries(skillsByCategory)) {
+      for (const skill of skills) {
+        if (lowerText.includes(skill.toLowerCase())) {
+          generated.push({
+            aufgabe: `Arbeit an: ${skill}`,
+            rolle: "",
+            kategorie,
+            skill,
+            soll: 3
+          });
+        }
+      }
+    }
+
+    setRows(generated);
   };
 
   return (
