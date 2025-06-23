@@ -57,28 +57,30 @@ export default function SkillMatrixSetup() {
   };
 
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-10">
       <h1 className="text-xl font-bold">SkillMatrix NG</h1>
 
       <div className="space-y-2">
         <label className="block text-sm font-medium">Projektbeschreibung eingeben:</label>
         <textarea
-          rows={6}
+          rows={8}
           value={projectText}
           onChange={(e) => setProjectText(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-4 border rounded text-sm"
           placeholder="Hier Projektbeschreibung eingeben..."
         />
-        <button
-          onClick={autoGenerateFromText}
-          className="px-4 py-2 bg-green-600 text-white rounded"
-        >
-          Projektstruktur mit KI erzeugen
-        </button>
+        <div>
+          <button
+            onClick={autoGenerateFromText}
+            className="mt-2 px-4 py-2 bg-green-600 text-white rounded"
+          >
+            Projektstruktur mit KI erzeugen
+          </button>
+        </div>
       </div>
 
       {rows.length > 0 && (
-        <div className="pt-4">
+        <div className="pt-6">
           <table className="min-w-full border text-sm mb-4">
             <thead>
               <tr className="bg-gray-100">
