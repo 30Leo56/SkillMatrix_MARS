@@ -55,11 +55,9 @@ export default function SkillMatrixSetup() {
     ];
     setRows(aiRows);
   };
-
   return (
     <div className="p-4 space-y-10">
-      <h1 className="text-xl font-bold">SkillMatrix NG</h1>
-
+      <h1 className="text-xl font-bold">SkillMatrix NG - TEST</h1>
       <div className="w-full mb-12">
         <label htmlFor="projektbeschreibung" className="block text-sm font-medium mb-2">
           Projektbeschreibung eingeben:
