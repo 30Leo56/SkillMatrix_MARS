@@ -58,9 +58,9 @@ export default function SkillMatrixSetup() {
 
   return (
     <div className="p-4 space-y-10">
-      <h1 className="text-xl font-bold">SkillMatrix NG - TXTEST</h1>
+      <h1 className="text-xl font-bold">SkillMatrix NG - FINALTEST</h1>
 
-      <section className="w-full mb-12 mt-8 px-4">
+      <section className="w-full px-4 mb-16">
         <label htmlFor="projektbeschreibung" className="block text-sm font-semibold mb-2">
           Projektbeschreibung eingeben:
         </label>
@@ -68,10 +68,10 @@ export default function SkillMatrixSetup() {
           id="projektbeschreibung"
           value={projectText}
           onChange={(e) => setProjectText(e.target.value)}
-          className="w-full h-40 p-3 border border-gray-300 rounded text-sm"
+          className="w-full h-48 p-3 border border-gray-300 rounded text-sm"
           placeholder="Hier Projektbeschreibung eingeben..."
         />
-        <div className="mt-3">
+        <div className="mt-4">
           <button
             onClick={autoGenerateFromText}
             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
