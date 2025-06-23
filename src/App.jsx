@@ -60,16 +60,15 @@ export default function SkillMatrixSetup() {
     <div className="p-4 space-y-10">
       <h1 className="text-xl font-bold">SkillMatrix NG - TEST</h1>
 
-      <div className="w-full px-2 py-4 bg-gray-50 rounded-lg shadow mb-12">
+      <section className="w-full max-w-7xl mx-auto mb-12">
         <label htmlFor="projektbeschreibung" className="block text-sm font-semibold mb-2">
           Projektbeschreibung eingeben:
         </label>
         <textarea
           id="projektbeschreibung"
-          rows={6}
           value={projectText}
           onChange={(e) => setProjectText(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded text-sm"
+          className="w-full h-40 p-3 border border-gray-300 rounded text-sm"
           placeholder="Hier Projektbeschreibung eingeben..."
         />
         <div className="mt-3">
@@ -80,7 +79,7 @@ export default function SkillMatrixSetup() {
             Projektstruktur mit KI erzeugen
           </button>
         </div>
-      </div>
+      </section>
 
       {rows.length > 0 && (
         <div className="pt-10">
