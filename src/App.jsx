@@ -79,8 +79,10 @@ export default function SkillMatrixSetup() {
         </div>
       </div>
 
+      <hr className="my-6 border-gray-300" />
+
       {rows.length > 0 && (
-        <div className="pt-6">
+        <div className="pt-16">
           <table className="min-w-full border text-sm mb-4">
             <thead>
               <tr className="bg-gray-100">
