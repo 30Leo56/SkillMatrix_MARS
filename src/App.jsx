@@ -83,24 +83,26 @@ export default function SkillMatrixSetup() {
         </button>
       </div>
 
-      <div className="pt-4">
-        <div className="grid grid-cols-5 gap-2 font-bold border-b pb-1 mb-2">
-          <div>Aufgabe</div>
-          <div>Rolle</div>
-          <div>Kategorie</div>
-          <div>Skill</div>
-          <div>Soll</div>
-        </div>
-        {rows.map((row, index) => (
-          <div key={index} className="grid grid-cols-5 gap-2 items-center mb-1">
-            <input type="text" placeholder="Aufgabe" value={row.aufgabe} onChange={(e) => handleChange(index, "aufgabe", e.target.value)} className="p-2 border rounded" />
-            <input type="text" placeholder="Rolle" value={row.rolle} onChange={(e) => handleChange(index, "rolle", e.target.value)} className="p-2 border rounded" />
-            <input type="text" placeholder="Kategorie" value={row.kategorie} onChange={(e) => handleChange(index, "kategorie", e.target.value)} className="p-2 border rounded" />
-            <input type="text" placeholder="Skill" value={row.skill} onChange={(e) => handleChange(index, "skill", e.target.value)} className="p-2 border rounded" />
-            <input type="number" min={1} max={4} value={row.soll} onChange={(e) => handleChange(index, "soll", e.target.value)} className="p-2 border rounded w-16" />
+      {rows.length > 0 && (
+        <div className="pt-4">
+          <div className="grid grid-cols-5 gap-2 font-bold border-b pb-1 mb-2">
+            <div>Aufgabe</div>
+            <div>Rolle</div>
+            <div>Kategorie</div>
+            <div>Skill</div>
+            <div>Soll</div>
           </div>
-        ))}
-      </div>
+          {rows.map((row, index) => (
+            <div key={index} className="grid grid-cols-5 gap-2 items-center mb-1">
+              <input type="text" placeholder="Aufgabe" value={row.aufgabe} onChange={(e) => handleChange(index, "aufgabe", e.target.value)} className="p-2 border rounded" />
+              <input type="text" placeholder="Rolle" value={row.rolle} onChange={(e) => handleChange(index, "rolle", e.target.value)} className="p-2 border rounded" />
+              <input type="text" placeholder="Kategorie" value={row.kategorie} onChange={(e) => handleChange(index, "kategorie", e.target.value)} className="p-2 border rounded" />
+              <input type="text" placeholder="Skill" value={row.skill} onChange={(e) => handleChange(index, "skill", e.target.value)} className="p-2 border rounded" />
+              <input type="number" min={1} max={4} value={row.soll} onChange={(e) => handleChange(index, "soll", e.target.value)} className="p-2 border rounded w-16" />
+            </div>
+          ))}
+        </div>
+      )}
 
       <h2 className="text-lg font-semibold pt-6">Team-Profile & Skill-Levels</h2>
       <div className="overflow-auto">
@@ -129,7 +131,7 @@ export default function SkillMatrixSetup() {
                   <td className="border px-2 py-1 text-center font-bold text-red-600">{allZeros ? "!!!" : ""}</td>
                   {teamMembers.map(member => {
                     const ist = skillLevels[member] || 0;
-                    const defizit = ist < soll ? (soll - ist >= 2 ? "!!!" : "!") : "";
+                    const defizit = soll - ist >= 2 ? "!" : "";
 
                     return (
                       <td
