@@ -2,12 +2,16 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 
 const initialRows = [];
-const teamMembers = ["Anna", "Ben", "Chris"];
+const initialTeamMembers = [
+  "Name 1", "Name 2", "Name 3", "Name 4",
+  "Name 5", "Name 6", "Name 7", "Name 8"
+];
 
 export default function SkillMatrixSetup() {
   const [rows, setRows] = useState(initialRows);
   const [projectText, setProjectText] = useState("");
   const [skills, setSkills] = useState({});
+  const [teamMembers, setTeamMembers] = useState(initialTeamMembers);
 
   const handleChange = (index, field, value) => {
     const updated = [...rows];
@@ -36,7 +40,6 @@ export default function SkillMatrixSetup() {
       skillsByCategory[sheetName] = rows.map((r) => r.Skill);
     });
 
-    // Einfache Logik: Zuordnung einiger generischer Aufgaben basierend auf Stichworten
     const lowerText = projectText.toLowerCase();
     const generated = [];
 
@@ -55,6 +58,12 @@ export default function SkillMatrixSetup() {
     }
 
     setRows(generated);
+  };
+
+  const handleNameChange = (index, value) => {
+    const updated = [...teamMembers];
+    updated[index] = value;
+    setTeamMembers(updated);
   };
 
   return (
@@ -121,15 +130,22 @@ export default function SkillMatrixSetup() {
 
       <h2 className="text-lg font-semibold pt-6">Team-Profile & Skill-Levels</h2>
       <div className="overflow-auto">
-        <table className="min-w-full border text-sm">
+        <table className="min-w-full border text-sm mb-2">
           <thead>
             <tr>
               <th className="border px-2 py-1">Skill</th>
               <th className="border px-2 py-1">Soll</th>
               <th className="border px-2 py-1">Lücke</th>
               <th className="border px-2 py-1">Defizit</th>
-              {teamMembers.map(name => (
-                <th key={name} className="border px-2 py-1">{name}</th>
+              {teamMembers.map((name, index) => (
+                <th key={index} className="border px-2 py-1">
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => handleNameChange(index, e.target.value)}
+                    className="text-center w-20"
+                  />
+                </th>
               ))}
             </tr>
           </thead>
