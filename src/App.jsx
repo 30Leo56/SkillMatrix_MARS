@@ -1,16 +1,12 @@
 import { useState } from "react";
+import * as XLSX from "xlsx";
 
-const initialRows = [
-  { aufgabe: "", rolle: "", kategorie: "", skill: "", soll: 1 }
-];
-
-const examplePrompt = "";
-
+const initialRows = [];
 const teamMembers = ["Anna", "Ben", "Chris"];
 
 export default function SkillMatrixSetup() {
   const [rows, setRows] = useState(initialRows);
-  const [projectText, setProjectText] = useState(examplePrompt);
+  const [projectText, setProjectText] = useState("");
   const [skills, setSkills] = useState({});
 
   const handleChange = (index, field, value) => {
@@ -29,8 +25,18 @@ export default function SkillMatrixSetup() {
     });
   };
 
-  const autoGenerateFromText = () => {
-    const aiRows = [
+  const autoGenerateFromText = async () => {
+    const response = await fetch("/skills.xlsx");
+    const data = await response.arrayBuffer();
+    const workbook = XLSX.read(data, { type: "array" });
+
+    const skillsByCategory = {};
+    workbook.SheetNames.forEach((sheetName) => {
+      const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+      skillsByCategory[sheetName] = rows.map((r) => r.Skill);
+    });
+
+    const tasks = [
       {
         aufgabe: "Insektenhotels konstruieren",
         rolle: "Bauleitung",
@@ -53,7 +59,8 @@ export default function SkillMatrixSetup() {
         soll: 4
       }
     ];
-    setRows(aiRows);
+
+    setRows(tasks);
   };
 
   return (
