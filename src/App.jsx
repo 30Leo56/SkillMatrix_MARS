@@ -109,10 +109,10 @@ export default function SkillMatrixSetup() {
             <tr>
               <th className="border px-2 py-1">Skill</th>
               <th className="border px-2 py-1">Soll</th>
+              <th className="border px-2 py-1">Lücke</th>
               {teamMembers.map(name => (
                 <th key={name} className="border px-2 py-1">{name}</th>
               ))}
-              <th className="border px-2 py-1">Lücke</th>
             </tr>
           </thead>
           <tbody>
@@ -126,6 +126,7 @@ export default function SkillMatrixSetup() {
                 <tr key={i}>
                   <td className="border px-2 py-1">{skillName}</td>
                   <td className="border px-2 py-1 text-center">{soll}</td>
+                  <td className="border px-2 py-1 text-center font-bold text-red-600">{allZeros ? "!!!" : ""}</td>
                   {teamMembers.map(member => {
                     const ist = skillLevels[member] || 0;
                     const defizit = ist < soll ? (soll - ist >= 2 ? "!!!" : "!") : "";
@@ -161,9 +162,6 @@ export default function SkillMatrixSetup() {
                       </td>
                     );
                   })}
-                  <td className="border px-2 py-1 text-center font-bold text-red-600">
-                    {allZeros ? "!!!" : ""}
-                  </td>
                 </tr>
               );
             })}
