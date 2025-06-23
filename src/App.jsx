@@ -1,7 +1,44 @@
 import { useState } from "react";
 import * as XLSX from "xlsx";
 
-const initialRows = [];
+const initialRows = [
+  {
+    aufgabe: "Insektenhotels konstruieren und aufstellen",
+    rolle: "Bauleitung",
+    kategorie: "Handwerk",
+    skill: "Holzbearbeitung",
+    soll: 3
+  },
+  {
+    aufgabe: "Finanzierung und Fördermittel organisieren",
+    rolle: "Fördermittelmanagement",
+    kategorie: "Finanzen",
+    skill: "Fördermittel beantragen",
+    soll: 2
+  },
+  {
+    aufgabe: "Schülerbetreuung und Zusammenarbeit koordinieren",
+    rolle: "Pädagogische Begleitung",
+    kategorie: "Soziales",
+    skill: "Anleitung Jugendlicher",
+    soll: 2
+  },
+  {
+    aufgabe: "Projekt dokumentieren",
+    rolle: "Dokumentation",
+    kategorie: "Kommunikation",
+    skill: "Fotografie",
+    soll: 2
+  },
+  {
+    aufgabe: "Öffentlichkeitsarbeit gestalten",
+    rolle: "PR",
+    kategorie: "Marketing",
+    skill: "Social Media",
+    soll: 3
+  }
+];
+
 const initialTeamMembers = [
   "Name 1", "Name 2", "Name 3", "Name 4",
   "Name 5", "Name 6", "Name 7", "Name 8"
